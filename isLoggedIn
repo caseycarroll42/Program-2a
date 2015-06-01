@@ -1,3 +1,5 @@
+#! /bin/sh
+
 argName=$1
 isLoggedIn=false
 
@@ -10,7 +12,7 @@ fi
 currentUsers=$(who | cut -d' ' -f1)
 
 IFS=$'\n'
-set $currentUsers 
+set $currentUsers
 
 #prints if user is logged in based on boolean 'isLoggedIn'
 printStatus() {
@@ -25,10 +27,10 @@ printStatus() {
 #for loop iterates through each username pulled from the who command
 for itr in $currentUsers; do
 	if [ "$argName" = "$itr" ]; then
-		isLoggedIn=true;
+		isLoggedIn=true
 		break
 	else
-		isLoggedIn=false;
+		isLoggedIn=false
 	fi
 done
 
