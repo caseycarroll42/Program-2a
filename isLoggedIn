@@ -1,0 +1,35 @@
+argName=$1
+isLoggedIn=false
+
+if [ -z "$argName" ]; then
+	echo "error: you must enter a user name."
+	echo "example: ./isLoggedIn userName"
+	exit
+fi
+
+currentUsers=$(who | cut -d' ' -f1)
+
+IFS=$'\n'
+set $currentUsers 
+
+#prints if user is logged in based on boolean 'isLoggedIn'
+printStatus() {
+	if $isLoggedIn; then
+		echo "$argName is logged in"
+	else
+		echo "$argName is NOT logged in"
+	fi
+}
+
+#MAIN of program
+#for loop iterates through each username pulled from the who command
+for itr in $currentUsers; do
+	if [ "$argName" = "$itr" ]; then
+		isLoggedIn=true;
+		break
+	else
+		isLoggedIn=false;
+	fi
+done
+
+printStatus
