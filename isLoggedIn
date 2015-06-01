@@ -21,8 +21,9 @@ if [ -z "$argName" ]; then
 	exit 0
 fi
 
-currentUsers=$(who | cut -d' ' -f1) #who with the following flags parses the 
-									#usernames from the standard who command
+#who with the following flags parses the 
+#usernames from the standard who command
+currentUsers=$(who | cut -d' ' -f1) 
 
 #parses currentUsers so currentUsers is now an array of users names
 IFS=$'\n' 
