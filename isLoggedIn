@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 #prints if user is logged in based on boolean 'isLoggedIn'
 printStatus() {
@@ -20,18 +20,11 @@ if [ -z "$argName" ]; then
 	echo "example: ./isLoggedIn userName"
 	exit 0
 fi
+#makes an array of all users logged into the system
+declare -a userList=($(users))
 
-#who with the following flags parses the 
-#usernames from the standard who command
-currentUsers=$(who | cut -d' ' -f1) 
-
-#parses currentUsers so currentUsers is now an array of users names
-IFS=$'\n' 
-set $currentUsers
-
-
-#for loop iterates through each username pulled from the who command
-for itr in $currentUsers; do
+#for loop iterates through each element of the user array
+for itr in ${userList[@]}; do
 	if [ "$argName" = "$itr" ]; then
 		isLoggedIn=true
 		break
